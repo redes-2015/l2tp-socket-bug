@@ -1,0 +1,21 @@
+diff -uNrp kernel-3.10.0-123.el7.orig/linux-3.10.0-123.el7.x86_64/net/l2tp/l2tp_ppp.c kernel-3.10.0-123.el7.new/linux-3.10.0-123.el7.x86_64/net/l2tp/l2tp_ppp.c
+--- linux-3.10.0-123.el7.x86_64/net/l2tp/l2tp_ppp.c	2014-05-05 11:58:32.000000000 -0300
++++ linux-3.10.0-123.el7.x86_64/net/l2tp/l2tp_ppp.c	2015-11-22 01:43:40.996000000 -0200
+@@ -1365,7 +1365,7 @@ static int pppol2tp_setsockopt(struct so
+ 	int err;
+ 
+ 	if (level != SOL_PPPOL2TP)
+-		return udp_prot.setsockopt(sk, level, optname, optval, optlen);
++		return -EINVAL;
+ 
+ 	if (optlen < sizeof(int))
+ 		return -EINVAL;
+@@ -1491,7 +1491,7 @@ static int pppol2tp_getsockopt(struct so
+ 	struct pppol2tp_session *ps;
+ 
+ 	if (level != SOL_PPPOL2TP)
+-		return udp_prot.getsockopt(sk, level, optname, optval, optlen);
++		return -EINVAL;
+ 
+ 	if (get_user(len, optlen))
+ 		return -EFAULT;
